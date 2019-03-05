@@ -2,4 +2,4 @@
 F1/10 - Team Ferrari Code - Autonomous Racing - Battle of the Algorithms  
 
 
-Team Members: Sandesh Banskota, Austin Sullivan, 
+Team Members: Sandesh Banskota, Austin Sullivan, ... 
