@@ -1,5 +1,8 @@
 # autonomousracing_ferrari_19
-F1/10 - Team Ferrari Code - Autonomous Racing - Battle of the Algorithms  
+F1/10 - Autonomous Racing - Battle of the Algorithms 
 
-
-Team Members: Sandesh Banskota, Austin Sullivan, ... 
+## Team Scuderia Ferrari
+- Sandesh Banskota - sb3vf
+- Andrew Lewis     - ajl5yc
+- Clayton Smith    - cps5aa
+- Austin Sullivan  - acs3ss
