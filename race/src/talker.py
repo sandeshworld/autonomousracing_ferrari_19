@@ -13,3 +13,23 @@ What you should do:
  3. Publish the calculated PWM values on topic "drive_pwm" using custom message drive_values
 """
 
+varP = drive_values(9831, 9831)  # initialize to neutral value
+
+def fnc_callback(msg):
+    # mapping function
+    global varP
+    varP.pwm_drive = int((msg.velocity * 32.77) + 9831)
+    varP.pwm_angle = int((msg.angle * 32.77) + 9831)
+    pub.publish(varP)
+
+
+if __name__=='__main__':
+    rospy.init_node('pub_n_sub')
+
+    pub=rospy.Publisher('drive_pwm', drive_values, queue_size=1)
+    sub=rospy.Subscriber('drive_parameters', drive_param, fnc_callback)
+    rate=rospy.Rate(10)
+
+
+    while not rospy.is_shutdown():
+        rate.sleep()
