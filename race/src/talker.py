@@ -3,7 +3,6 @@
 import rospy
 from race.msg import drive_values
 from race.msg import drive_param
-from std_msgs.msg import Bool
 
 
 """
@@ -13,7 +12,7 @@ What you should do:
  3. Publish the calculated PWM values on topic "drive_pwm" using custom message drive_values
 """
 
-varP = drive_values(9831, 9831)  # initialize to neutral value
+varP = drive_values()
 
 def fnc_callback(msg):
     # mapping function
