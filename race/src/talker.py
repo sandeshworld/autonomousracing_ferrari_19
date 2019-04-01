@@ -17,8 +17,8 @@ varP = drive_values()
 def fnc_callback(msg):
     # mapping function
     global varP
-    varP.pwm_drive = int((msg.velocity * 32.77) + 9831)
-    varP.pwm_angle = int((msg.angle * 32.77) + 9831)
+    varP.pwm_drive = int((msg.velocity * 32.76) + 9831)
+    varP.pwm_angle = int((msg.angle * 32.76) + 9831)
     
 
 if __name__=='__main__':
