@@ -31,14 +31,14 @@ while key != ord('q'):
             elif forward + forward_delta >= 100:
 		forward = 100
             else:
-                forward += forward_delta 
+                forward += forward_delta
         elif key == curses.KEY_DOWN:
             if -7 < forward < 7:
                 forward = -7
             elif forward - forward_delta <= -100:
 		forward = -100
             else:
-                forward -= forward_delta 
+                forward -= forward_delta
         elif key == curses.KEY_LEFT:
             if left - left_delta <= -100:
                 left = -100
@@ -54,7 +54,7 @@ while key != ord('q'):
 
 	msg = drive_param()
 	msg.velocity = forward
-	msg.angle = left 
+	msg.angle = left
 	pub.publish(msg)
 
 curses.endwin()

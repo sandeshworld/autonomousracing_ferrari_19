@@ -42,7 +42,7 @@ def fnc_callback(msg):
     global varP
     varP.pwm_drive = int((msg.velocity * 32.76) + 9830)
     varP.pwm_angle = int((msg.angle * 32.76) + 9830)
-        
+
 if __name__=='__main__':
     k = 1
     rospy.init_node('pub_n_sub')
@@ -61,4 +61,3 @@ if __name__=='__main__':
         k += 1
 	pub.publish(varP)
         rate.sleep()
-
