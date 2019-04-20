@@ -2,6 +2,7 @@
 
 import rospy
 import math
+import statistics
 from sensor_msgs.msg import LaserScan
 from race.msg import pid_input
 
@@ -30,7 +31,7 @@ def getRange(data, theta):
 		dist_list = [dist for dist in dist_list if dist is not math.nan]  # filter NaN
 		if len(dist_list) == 0:
 			continue  # increase the range we're scanning and try again
-		return sum(dist_list) / float(len(dist_list))
+		return statistics.median(dist_list)
 	return 2  # TODO change this
 
 
