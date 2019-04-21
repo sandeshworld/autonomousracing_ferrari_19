@@ -2,7 +2,6 @@
 
 import rospy
 import math
-import statistics
 from sensor_msgs.msg import LaserScan
 from race.msg import pid_input
 
@@ -10,7 +9,7 @@ from race.msg import pid_input
 angle_range = 240	# sensor angle range of the lidar
 car_length = 1.5	# distance (in m) that we project the car forward for correcting the error. You may want to play with this.
 desired_distance = 1	# distance from the wall (left or right - we cad define..but this is defined for right). You should try different values
-vel = 15 		# this vel variable is not really used here.
+vel = 8 		# this vel variable is not really used here.
 error = 0.0
 
 pub = rospy.Publisher('error', pid_input, queue_size=10)
@@ -31,7 +30,7 @@ def getRange(data, theta):
 		dist_list = [dist for dist in dist_list if dist is not math.nan]  # filter NaN
 		if len(dist_list) == 0:
 			continue  # increase the range we're scanning and try again
-		return statistics.median(dist_list)
+		return sorted(dist_list)[len(dist_list)//2]  # take the median
 	return 2  # TODO change this
 
 

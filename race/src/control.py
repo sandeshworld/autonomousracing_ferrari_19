@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import math
 import rospy
 from race.msg import drive_param
 from race.msg import pid_input
@@ -8,10 +7,11 @@ kp = 14.0
 kd = 0.09
 servo_offset = 18.5	# zero correction offset in case servo is misaligned.
 prev_error = 0.0
-vel_input = 25.0	# arbitrarily initialized. 25 is not a special value. This code can input desired velocity from the user.
+vel_input = 8.0	# arbitrarily initialized. 25 is not a special value. This code can input desired velocity from the user.
 angle = 90
 
 pub = rospy.Publisher('drive_parameters', drive_param, queue_size=1)
+
 
 def control(data):
 	global prev_error
@@ -39,6 +39,7 @@ def control(data):
 	msg.velocity = vel_input
 	msg.angle = angle
 	pub.publish(msg)
+
 
 if __name__ == '__main__':
 	global kp
