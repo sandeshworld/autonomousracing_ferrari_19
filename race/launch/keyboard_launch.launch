@@ -1,7 +1,0 @@
-<launch>
-    <node pkg="race" name="talker" type="talker.py"/>
-
-    <node pkg="rosserial_python" name="serial" type="serial_node.py" args="/dev/ttyACM0"/>
-
-    <node pkg="race" name="keyboard" type="keyboard.py" launch-prefix="gnome-terminal -e"/>
-</launch>
