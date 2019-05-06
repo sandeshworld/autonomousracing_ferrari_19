@@ -1,9 +1,12 @@
 <launch>
+    <node pkg="urg_node" name="urg_node" type="urg_node"/>
+
+    <node pkg="rosserial_python" name="serial" type="serial_node.py" args="/dev/ttyACM1"/>
+
     <node pkg="race" name="talker" type="talker.py"/>
 
-    <node pkg="rosserial_python" name="serial" type="serial_node.py" args="/dev/ttyACM0"/>
+    <node pkg="race" name="control" type="control.py"/>
 
     <node pkg="race" name="dist_finder" type="dist_finder.py"/>
-
-    <node pkg="race" name="control" type="control.py"/>
 </launch>
+

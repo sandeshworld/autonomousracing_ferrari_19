@@ -26,9 +26,8 @@ varP = drive_values()
 varP.pwm_drive = 9830
 varP.pwm_angle = 9830
 
-
 def check_connection():
-    address = '192.168.1.31'
+    address = '192.168.1.1'
     signal.alarm(1)
     try:
         res = subprocess.call(['ping','-c','1',address])
@@ -51,13 +50,17 @@ if __name__=='__main__':
     sub=rospy.Subscriber('drive_parameters', drive_param, fnc_callback)
     rate=rospy.Rate(60)
 
+    ignore = 0
+    default = drive_values()
+    default.pwm_drive = 9830 + int((32.76) * 0)
+    default.pwm_angle = 9830
     while not rospy.is_shutdown():
         if k % 20 == 0:
             if not check_connection():
                 varP.pwm_drive=9830
                 varP.pwm_angle=9830
-                pub.publish(varP)
+		pub.publish(varP)
                 exit()
-        k += 1
 	pub.publish(varP)
+        k += 1
         rate.sleep()
