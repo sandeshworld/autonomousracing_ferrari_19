@@ -30,7 +30,7 @@ def getError(theta, a, b):
 	desired_trajectory = desired_distance - ab
 	cd = ab + car_length*math.sin(alpha)
 	return desired_trajectory - cd
-	
+
 
 ##	Input: 	data: Lidar scan data
 ##			theta: The angle at which the distance is requried
@@ -43,7 +43,7 @@ def getRange(data, theta):
 	# assuming angle_min = 0, angle_max = 240, angle_increment = 1
 	index = int((theta + 30)*3.025)
 	too_far = min(index + 2, 720)
-        while math.isnan(data.ranges[index]): 
+        while math.isnan(data.ranges[index]):
        		index+=1
                 if index > too_far:
                 	return 4  # it's all NaN. Assume the wall is very far away
@@ -64,16 +64,8 @@ def callback(data):
         #Right side of the wall
 	a1 = getRange(data, theta1)
 	a2 = getRange(data, theta2)
-
-        b = getRange(data,0)	# Note that the 0 implies a horizontal ray..the actual angle for the LIDAR may be 30 degrees and not 0.
-        """
-        #left side of the wall
-        l1 = getRange(data, 120)
-        
-        lb = getRange(data,180)
-"""
-
-        c = getRange(data, 90)  # is there something directly in front of the car?
+	b = getRange(data,0)	# Note that the 0 implies a horizontal ray..the actual angle for the LIDAR may be 30 degrees and not 0.
+	c = getRange(data, 90)  # is there something directly in front of the car?
 	# d = getRange(data, 180)
 
 	msg = pid_input()
@@ -106,9 +98,9 @@ def callback(data):
 	# 	msg.pid_error = 0
 	# 	pub.publish(msg)
 	# 	return
-	# else: 
+	# else:
 	# 	stopped = 0
-	# 
+	#
 
 	## END
         #error right side
@@ -119,8 +111,8 @@ def callback(data):
         #error left side
         #errorleft = getError(theta_left,l1,lb)
 
-        
-        
+
+
 	print("Error:", error)
 	msg.pid_error = error		# this is the error that you want to send to the PID for steering correction.
 	#msg.pid_vel = 27
@@ -146,7 +138,7 @@ def callback(data):
         else:
                 num1+=1
                 msg.pid_vel = 8
-                
+
                 if c < 2.4:
                         print("something is ahead \n")
                         if msg.pid_error > 0:
@@ -156,8 +148,8 @@ def callback(data):
                                 msg.pid_vel = 8
                         else:
                                 msg.pid_vel = 0
-                        
-        
+
+
         pub.publish(msg)
         #print(time.time())
         #print("\n")
@@ -167,6 +159,5 @@ if __name__ == '__main__':
 	rospy.init_node('dist_finder',anonymous = True)
 
         rospy.Subscriber("scan",LaserScan,callback)
-        
+
         rospy.spin()
-        

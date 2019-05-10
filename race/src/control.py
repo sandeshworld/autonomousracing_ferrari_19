@@ -21,7 +21,7 @@ def control(data):
 	global kd
 	global angle
         global prev_time
-        
+
 	## Your code goes here
 	# 1. Scale the error
 	error = data.pid_error
@@ -40,7 +40,7 @@ def control(data):
 	msg = drive_param();
 	msg.velocity = vel_input
 	msg.angle = angle
-	print "Angle:", msg.angle 
+	print "Angle:", msg.angle
 	print "Velocity:", msg.velocity
         print "prev_error:", error
         print "-----------------------"
