@@ -3,30 +3,33 @@ import math
 import rospy
 from race.msg import drive_param
 from race.msg import pid_input
+import time
 
-kp = 30.0
-kd = 0.1
+kp = 6.1
+kd = 0.05
 servo_offset = 18.5	# zero correction offset in case servo is misaligned.
 prev_error = 0.0
-vel_input = 10.0   # arbitrarily initialized. 25 is not a special value. This code can input desired velocity from the user.
 angle = 0
 
 pub = rospy.Publisher('drive_parameters', drive_param, queue_size=1)
 
+prev_time = time.time()
+
 def control(data):
 	global prev_error
-	global vel_input
 	global kp
 	global kd
 	global angle
-
+        global prev_time
+        
 	## Your code goes here
 	# 1. Scale the error
-	error = 4*data.pid_error
+	error = data.pid_error
+        cur_time = time.time()
 	# 2. Apply the PID equation on error to compute steering
-	v0 = (kp*error) + kd*(prev_error - error)
+	v0 = (kp*error) + kd*(prev_error - error)/(cur_time-prev_time)
 	# 3. Make sure the steering value is within bounds for talker.py
-
+        prev_time = time.time()
 	prev_error = error
 	angle = -v0
 
@@ -35,21 +38,15 @@ def control(data):
 	## END
 
 	msg = drive_param();
-	msg.velocity = vel_input # if -10<angle<10 else vel_input
+	msg.velocity = vel_input
 	msg.angle = angle
 	print "Angle:", msg.angle 
 	print "Velocity:", msg.velocity
-	print "-----------------------"
+        print "prev_error:", error
+        print "-----------------------"
 	pub.publish(msg)
 
 if __name__ == '__main__':
-	# global kp
-	# global kd
-	# global vel_input
-	# print("Listening to error for PID")
-	# kp = input("Enter Kp Value: ")
-	# kd = input("Enter Kd Value: ")
-	# vel_input = input("Enter Velocity: ")
 	rospy.init_node('pid_controller', anonymous=True)
 	rospy.Subscriber("error", pid_input, control)
 	rospy.spin()

@@ -1,5 +1,5 @@
 <launch>
-    <node pkg="urg_node" name="urg_node" type="urg_node"/>
+1;2802;0c    <node pkg="urg_node" name="urg_node" type="urg_node"/>
 
     <node pkg="rosserial_python" name="serial" type="serial_node.py" args="/dev/ttyACM1"/>
 
