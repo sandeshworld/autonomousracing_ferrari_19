@@ -15,3 +15,6 @@ Final Outcome:
 Won the fastest lap award in the final autonomous driving competition by a large margin. 
 
 Medium Blog Post: https://medium.com/team-ferrari-f1-10-autonomous-racing-team-spring
+
+![image](https://user-images.githubusercontent.com/28467603/130332281-eb31a8c3-88cd-47ac-9ac2-d6c2ee98dc7f.png)
+
